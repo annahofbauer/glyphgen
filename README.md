@@ -1,0 +1,1 @@
+Dieses Projekt wurde im Rahmen eines Freelance-Auftrags für Lastrave Event GbR entwickelt. Veröffentlicht mit Erlaubnis.
