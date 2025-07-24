@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+.Python
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Byte-compiled / cache
+*.pyc
+*.pkl
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# Output & Logs
+output/
+*.log
+
+# Web-Frontend (optional, falls später ergänzt)
+node_modules/
+dist/
+build/
+
+# Temporary
+*.tmp
+*.bak
