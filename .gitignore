@@ -40,3 +40,6 @@ build/
 # Temporary
 *.tmp
 *.bak
+
+# Private Notizen (lokal)
+NOTES.md
