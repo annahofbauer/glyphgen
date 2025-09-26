@@ -1,4 +1,7 @@
 import math
+import json
+import pandas as pd
+
 
 def luminance(rgb):
     """
@@ -31,9 +34,36 @@ def clustersize(glyph_size, height, width):
         tuple[float, float]: Höhe und Breite eines Clusters in Pixeln 
                              (cluster_height, cluster_width)."""
     
-    cluster_y = math.floor(height / glyph_size)
-    cluster_x = math.floor(width / glyph_size)
+    cluster_y = math.floor(height / glyph_size) #Glyphen Anzahl Zeilen
+    cluster_x = math.floor(width / glyph_size) #Glyphen Anzahl Spalten
 
-    cluster_height = height / cluster_y
-    cluster_width  = width / cluster_x
+    cluster_height = height / cluster_y #Höhe der Zellen
+    cluster_width  = width / cluster_x #Breite der Zellen
     return cluster_y, cluster_x, cluster_height, cluster_width
+
+def getGlyph(value):
+    """
+    Gibt den Glyphen zurück, der dem übergebenen Helligkeitswert (value) 
+    entsprechend der Definition in der JSON-Datei zugeordnet ist.
+
+    Args:
+        value (float): Luminanzwert zwischen 0 und 255.
+
+    Returns:
+        str: Glyph-Zeichen, das dem Intervall entspricht. Fallback ist "#".
+    """
+
+    # Einmaliges Einlesen und Konvertieren der Intervall-Daten
+    if not hasattr(getGlyph, "intervals"):
+        with open("../data/glyph_intervals.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+        getGlyph.intervals = [
+            (entry["glyph"], pd.Interval(entry["min"], entry["max"], closed="left"))
+            for entry in data
+        ]
+
+    # Glyph für den gegebenen Wert finden
+    for glyph, interval in getGlyph.intervals:
+        if value in interval:
+            return glyph
+    return "#"  # Fallback
